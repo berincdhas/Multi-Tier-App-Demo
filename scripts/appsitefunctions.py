@@ -134,12 +134,12 @@ def getserverinfo():
 	#This code establishes a connection to the DNS server to get the host's IP address.  This is to get the real IP address.  
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	sock.connect((finddnsresolver(),53)) # sock.connect(("nameserver",53))
-	ipaddress=(sock.getsockname()[0])
+#	ipaddress=(sock.getsockname()[0])
 	sock.close()
 
 	#This get the hostname as defined in /etc/hostname
 	hostname = (socket.gethostname())
-
+        ipaddress=socket.gethostbyname(hostname)
 	#Use OS environment variables gather information
 	serverport = getserverparam('SERVER_PORT')
 	
@@ -273,7 +273,7 @@ def printsite(modulename,formname_or_cmd,formnotes,formcount):
 					appserverhtml = removehtmlheaders(appserverresponse.read())
 					print appserverhtml
 				except:
-					print '<table border="0"><tr><td>Hostname:</td><td><font color="red">ERROR</font><br></td></tr><tr><td>IPv4:</td><td><font color="red">ERROR</font><br></td></tr><tr><td>Protocol: </td><td><font color="red">ERROR</font><br></td></tr><tr><td>Port: </td><td><font color="red">ERROR</font><br></td></tr><tr><td>Application Version:</td><td><font color="red">ERROR</font><br></td></tr></font><tr><td>Local System Time:</td><td><font color="red">ERROR</font><br></td></tr></table>'
+					print '<table border="0" bgcolor="#FFFFFF" class="GeneratedTables"><tr><td>Hostname:</td><td><font color="red">ERROR</font><br></td></tr><tr><td>IPv4:</td><td><font color="red">ERROR</font><br></td></tr><tr><td>Protocol: </td><td><font color="red">ERROR</font><br></td></tr><tr><td>Port: </td><td><font color="red">ERROR</font><br></td></tr><tr><td>Application Version:</td><td><font color="red">ERROR</font><br></td></tr></font><tr><td>Local System Time:</td><td><font color="red">ERROR</font><br></td></tr></table>'
 
 			if each == '<!-- StartCustom -->':
 				#This uses to value passed from the URL to basically set which .py script is used for this section.
@@ -320,4 +320,4 @@ def printsite(modulename,formname_or_cmd,formnotes,formcount):
 
 
 
-				
+			
